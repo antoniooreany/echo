@@ -20,7 +20,7 @@ public class Client {
              Reader reader = new InputStreamReader(socket.getInputStream());
              Writer writer = new OutputStreamWriter(socket.getOutputStream());
         ) {
-            writer.write(CONTENT.toCharArray());
+            writer.write((CONTENT).toCharArray());
             writer.flush();
             char[] buffer = new char[BUFFER_SIZE];
             int count = reader.read(buffer);
