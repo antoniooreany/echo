@@ -17,18 +17,18 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
         try (Socket socket = new Socket("localhost", 3000);
-             InputStream inputStream = new BufferedInputStream(socket.getInputStream());
-             OutputStream outputStream = new BufferedOutputStream(socket.getOutputStream());
+             Reader reader = new InputStreamReader(socket.getInputStream());
+             Writer writer = new OutputStreamWriter(socket.getOutputStream());
         ) {
-            outputStream.write(CONTENT.getBytes());
-            outputStream.flush();
-            byte[] buffer = new byte[BUFFER_SIZE];
-            int count = inputStream.read(buffer);
+            writer.write(CONTENT.toCharArray());
+            writer.flush();
+            char[] buffer = new char[BUFFER_SIZE];
+            int count = reader.read(buffer);
 
             String contentFromServer = new String(buffer, 0, count);
             System.out.println(contentFromServer);
 
-            outputStream.write(contentFromServer.getBytes());
+            writer.write(contentFromServer.toCharArray());
         }
     }
 }

@@ -3,7 +3,6 @@ package com.gorshkov.echo;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 //client -> ${content}
 //        server -> echo ${content}
@@ -21,14 +20,14 @@ public class Server {
         ) { //listen
             while (true) {
                 try (Socket socket = serverSocket.accept();
-                     InputStream inputStream = new BufferedInputStream(socket.getInputStream());
-                     OutputStream outputStream = new BufferedOutputStream(socket.getOutputStream());) {
-                    byte[] buffer = new byte[BUFFER_SIZE];
-                    int count = inputStream.read(buffer);
+                     Reader reader = new InputStreamReader(socket.getInputStream());
+                     Writer writer = new OutputStreamWriter(socket.getOutputStream());) {
+                    char[] buffer = new char[BUFFER_SIZE];
+                    int count = reader.read(buffer);
                     String content = new String(buffer, 0, count);
                     System.out.println(content);
                     String message = "echo " + content;
-                    outputStream.write(message.getBytes());
+                    writer.write(message.toCharArray());
 //                    count = inputStream.read(buffer);
 //                    content = new String(buffer, 0, count);
 //                    System.out.println(content);
