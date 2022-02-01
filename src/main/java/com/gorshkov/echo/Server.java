@@ -21,8 +21,8 @@ public class Server {
         ) { //listen
             while (true) {
                 try (Socket socket = serverSocket.accept();
-                     Reader reader = new InputStreamReader(socket.getInputStream());
-                     Writer writer = new OutputStreamWriter(socket.getOutputStream());) {
+                     Reader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                     Writer writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));) {
                     char[] buffer = new char[BUFFER_SIZE];
                     int count = reader.read(buffer);
                     String content = new String(buffer, 0, count);

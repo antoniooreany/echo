@@ -14,11 +14,13 @@ public class Client {
 
     private static final String CONTENT = "Hello from client";
     private static final int BUFFER_SIZE = 512;
+    private static final String URI = "localhost";
+    private static final int PORT = 3000;
 
     public static void main(String[] args) throws IOException {
-        try (Socket socket = new Socket("localhost", 3000);
-             Reader reader = new InputStreamReader(socket.getInputStream());
-             Writer writer = new OutputStreamWriter(socket.getOutputStream());
+        try (Socket socket = new Socket(URI, PORT);
+             Reader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             Writer writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         ) {
             writer.write((CONTENT).toCharArray());
             writer.flush();
