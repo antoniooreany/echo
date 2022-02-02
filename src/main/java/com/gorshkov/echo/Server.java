@@ -23,11 +23,13 @@ public class Server {
         ) { //listen
             while (true) {
                 try (Socket socket = serverSocket.accept();
-                     Reader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                     Writer writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));) {
+                     BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));) {
                     char[] buffer = new char[BUFFER_SIZE];
                     int count = reader.read(buffer);
+//                    String line = reader.readLine();
                     String content = new String(buffer, 0, count);
+//                    String content = new String(line.toCharArray(), 0, line.length());
                     System.out.println(content + " " + clientCount++);
                     String message = ECHO + content;
                     writer.write(message.toCharArray());
