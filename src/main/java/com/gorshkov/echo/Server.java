@@ -14,7 +14,9 @@ import java.net.Socket;
 public class Server {
 
     private static final int BUFFER_SIZE = 512;
-    private static int clientCount = 0;
+    private static final String ECHO = "echo ";
+
+    private static int clientCount;
 
     public static void main(String[] args) throws IOException {
         try (ServerSocket serverSocket = new ServerSocket(3000);
@@ -27,7 +29,7 @@ public class Server {
                     int count = reader.read(buffer);
                     String content = new String(buffer, 0, count);
                     System.out.println(content + " " + clientCount++);
-                    String message = "echo " + content;
+                    String message = ECHO + content;
                     writer.write(message.toCharArray());
 //                    count = inputStream.read(buffer);
 //                    content = new String(buffer, 0, count);
