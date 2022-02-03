@@ -25,7 +25,7 @@ public class Client {
             ) {
                 Scanner scanner = new Scanner(System.in);
                 String nextLine = scanner.nextLine(); //TODO nextLine() finishes the client. Why?
-                writer.write(nextLine); //TODO Why nextLine is not written to the server?
+                writer.write(nextLine + "\r\n"); //TODO Why nextLine is not written to the server?
                 writer.flush();
                 String contentFromServer = reader.readLine();
                 System.out.println(contentFromServer);
