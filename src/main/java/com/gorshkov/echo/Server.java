@@ -26,6 +26,9 @@ public class Server {
                      BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                      BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));) {
                     String line = reader.readLine();
+                    if ("exit".equals(line)) {
+                        break;
+                    }
                     String content = new String(line.toCharArray(), 0, line.length());
                     System.out.println(content + " " + clientCount++);
                     String message = ECHO + content;
