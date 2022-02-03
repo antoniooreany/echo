@@ -22,14 +22,16 @@ public class Client {
             try (Socket socket = new Socket(URI, PORT);
                  BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                  BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+                 Scanner scanner = new Scanner(System.in);
+
             ) {
-                Scanner scanner = new Scanner(System.in);
                 String nextLine = scanner.nextLine();
                 writer.write(nextLine + "\r\n");
                 writer.flush();
                 String contentFromServer = reader.readLine();
                 System.out.println(contentFromServer);
                 writer.write(contentFromServer.toCharArray());
+//                scanner.close();//TODO close the stream.
             }
         }
     }
