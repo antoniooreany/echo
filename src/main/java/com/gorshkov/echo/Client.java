@@ -24,8 +24,8 @@ public class Client {
                  BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             ) {
                 Scanner scanner = new Scanner(System.in);
-                String nextLine = scanner.nextLine(); //TODO nextLine() finishes the client. Why?
-                writer.write(nextLine + "\r\n"); //TODO Why nextLine is not written to the server?
+                String nextLine = scanner.nextLine();
+                writer.write(nextLine + "\r\n");
                 writer.flush();
                 String contentFromServer = reader.readLine();
                 System.out.println(contentFromServer);
